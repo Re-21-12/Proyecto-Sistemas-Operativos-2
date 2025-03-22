@@ -1,0 +1,37 @@
+<div class="container mt-4 d-flex justify-content-center">
+  <div class="form-container" style="max-width: 500px; width: 100%">
+    <h2 class="text-center mb-4">@if(!id){Create New Item}@else{Edit Item}</h2>
+
+    <form [formGroup]="itemForm" (ngSubmit)="onSubmit()" class="p-4">
+      @if(!id){
+      <mat-form-field appearance="fill" class="full-width mb-3">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="id" />
+        <mat-error *ngIf="itemForm.get('id')?.errors?.['required']">
+          ID es requerido
+        </mat-error>
+      </mat-form-field>
+      }
+
+      <mat-form-field appearance="fill" class="full-width mb-3">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" />
+        <mat-error *ngIf="itemForm.get('name')?.errors?.['required']">
+          Nombre es requerido
+        </mat-error>
+      </mat-form-field>
+
+      <div class="button-row d-flex justify-content-center gap-3 mt-4">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="itemForm.invalid"
+        >
+          Save
+        </button>
+        <button mat-button (click)="goBack()">Back</button>
+      </div>
+    </form>
+  </div>
+</div>

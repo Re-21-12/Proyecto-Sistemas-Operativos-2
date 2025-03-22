@@ -3,8 +3,10 @@ version: '3.8'
 services:
   app:
     build: .
+    ports:
+      - "5000:5000"  # Exponer el puerto 5000 al host
     expose:
-      - "3000"  # Exponer el puerto 3000 solo dentro de la red de Docker, no al host
+      - "5000"  # Exponer el puerto dentro de la red de Docker
     depends_on:
       - db
     environment:
