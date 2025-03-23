@@ -4,7 +4,7 @@ import { NewItemComponent } from './modules/new-item/new-item.component';
 
 export const routes: Routes = [
   {
-    path: 'home',
+    path: '',
     component: ComponentComponent,
   },
   {

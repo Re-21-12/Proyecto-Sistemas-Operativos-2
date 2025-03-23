@@ -9,6 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { NgModel } from '@angular/forms';
+import { MatListModule } from '@angular/material/list';
 @Component({
   selector: 'app-component',
   imports: [
@@ -18,7 +19,8 @@ import { NgModel } from '@angular/forms';
     MatInputModule,
     MatFormFieldModule,
     MatCardModule,
-    CommonModule
+    CommonModule,
+    MatListModule
   ],
   templateUrl: './component.component.html',
   styleUrl: './component.component.scss'

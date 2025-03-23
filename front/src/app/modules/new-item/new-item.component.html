@@ -1,36 +1,73 @@
-<div class="container mt-4 d-flex justify-content-center">
-  <div class="form-container" style="max-width: 500px; width: 100%">
-    <h2 class="text-center mb-4">@if(!id){Create New Item}@else{Edit Item}</h2>
+<div class="h-screen flex items-center justify-center bg-gray-100">
+  <div class="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
+    <h2 class="text-center text-xl font-semibold mb-4">
+      {{ !id ? "Crear nuevo item" : "Editar item" }}
+    </h2>
 
-    <form [formGroup]="itemForm" (ngSubmit)="onSubmit()" class="p-4">
-      @if(!id){
-      <mat-form-field appearance="fill" class="full-width mb-3">
-        <mat-label>ID</mat-label>
-        <input matInput formControlName="id" />
-        <mat-error *ngIf="itemForm.get('id')?.errors?.['required']">
-          ID es requerido
-        </mat-error>
-      </mat-form-field>
-      }
+    <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+      <!-- Condicional para el campo ID -->
+      <div *ngIf="!id">
+        <mat-form-field appearance="fill" class="w-full mb-4">
+          <mat-label>ID</mat-label>
+          <input matInput formControlName="id" />
+          <mat-error *ngIf="itemForm.get('id')?.errors?.['required']">
+            ID es requerido
+          </mat-error>
+        </mat-form-field>
+      </div>
 
-      <mat-form-field appearance="fill" class="full-width mb-3">
-        <mat-label>Name</mat-label>
+      <!-- Campo de Nombre -->
+      <mat-form-field appearance="fill" class="w-full mb-4">
+        <mat-label>Nombre</mat-label>
         <input matInput formControlName="name" />
         <mat-error *ngIf="itemForm.get('name')?.errors?.['required']">
           Nombre es requerido
         </mat-error>
       </mat-form-field>
 
-      <div class="button-row d-flex justify-content-center gap-3 mt-4">
+      <!-- Campo de Edad -->
+      <mat-form-field appearance="fill" class="w-full mb-4">
+        <mat-label>Edad</mat-label>
+        <input matInput formControlName="age" type="number" />
+        <mat-error *ngIf="itemForm.get('age')?.errors?.['required']">
+          Edad es requerida
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Campo de Descripción -->
+      <mat-form-field appearance="fill" class="w-full mb-4">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+        <mat-error *ngIf="itemForm.get('description')?.errors?.['required']">
+          Descripción es requerida
+        </mat-error>
+      </mat-form-field>
+
+      <div class="flex justify-center gap-4 mt-4">
         <button
           mat-raised-button
           color="primary"
           type="submit"
           [disabled]="itemForm.invalid"
+          class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
         >
-          Save
+          Guardar
         </button>
-        <button mat-button (click)="goBack()">Back</button>
+        <button
+          mat-stroked-button
+          (click)="goBack()"
+          class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400"
+        >
+          Regresar
+        </button>
+        <button
+          mat-button
+          color="secondary"
+          (click)="resetForm()"
+          class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400"
+        >
+          Limpiar
+        </button>
       </div>
     </form>
   </div>

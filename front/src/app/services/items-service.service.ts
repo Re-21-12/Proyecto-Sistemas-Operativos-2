@@ -5,30 +5,34 @@ import { inject, Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ItemsServiceService {
-private _httpClient = inject(HttpClient)
-  constructor() { }
+  private _httpClient = inject(HttpClient);
+
+  constructor() {}
 
   private apiUrl = 'http://localhost:5000/api/items';
 
+  // Obtener todos los elementos
   getAllItems() {
     return this._httpClient.get<any[]>(this.apiUrl);
   }
 
+  // Obtener un elemento por su ID
   getItemById(id: number) {
-    return this._httpClient.post<any>(`${this.apiUrl}/get`, { id });
+    return this._httpClient.get<any>(`${this.apiUrl}/${id}`);
   }
 
-  createItem(id:any, name:any) {
-
-    return this._httpClient.post<any>(this.apiUrl, { id, name});
+  // Crear un nuevo registro
+  createItem(id: any, name: any, age: number, description: string) {
+    return this._httpClient.post<any>(this.apiUrl, { id, name, age, description });
   }
 
-  updateItem(id: number, name: string) {
-    return this._httpClient.put<any>(this.apiUrl, { id, name });
+  // Actualizar un registro existente
+  updateItem(id: number, name: string, age: number, description: string) {
+    return this._httpClient.put<any>(`${this.apiUrl}/${id}`, { name, age, description });
   }
 
+  // Eliminar un registro
   deleteItem(id: number) {
-    return this._httpClient.post<any>(`${this.apiUrl}/delete`, { id });
+    return this._httpClient.delete<any>(`${this.apiUrl}/${id}`);
   }
-
 }

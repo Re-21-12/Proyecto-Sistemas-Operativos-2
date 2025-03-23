@@ -1,69 +1,60 @@
-<div class="container py-4">
-  <header
-    class="text-center mat-elevation-z2 bg-primary text-white rounded"
-    style="padding: 25px; margin-bottom: 30px"
-  >
-    <h1 class="mat-h1 mb-0">Sistema de Gestión</h1>
+<div class="h-screen flex flex-col">
+  <!-- Header -->
+  <header class="text-center shadow-md bg-blue-600 text-white py-4">
+    <h1 class="text-2xl font-bold">Sistema de Gestión</h1>
   </header>
 
-  <main class="d-flex justify-content-center">
-    <mat-card style="width: 90%; max-width: 1200px">
-      <mat-card-header
-        class="d-flex justify-content-between align-items-center mb-4"
-      >
-        <mat-card-title class="mb-0">Datos del Sistema</mat-card-title>
-        <button mat-raised-button color="primary" (click)="createItem()">
+  <!-- Contenido principal -->
+  <main class="flex flex-grow justify-center items-center p-6 bg-gray-100">
+    <mat-card class="w-full max-w-5xl shadow-lg rounded-lg p-6">
+      <!-- Botón Crear Nuevo -->
+      <mat-card-header class="flex justify-between items-center mb-4">
+        <button
+          mat-raised-button
+          color="primary"
+          class="flex items-center gap-2"
+          (click)="createItem()"
+        >
           <mat-icon>add</mat-icon> Crear Nuevo
         </button>
       </mat-card-header>
 
+      <!-- Lista de Tarjetas -->
       <mat-card-content>
-        <table mat-table [dataSource]="items" class="mat-elevation-z2 w-100">
-          <!-- ID Column -->
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef class="text-center">ID</th>
-            <td mat-cell *matCellDef="let element" class="text-center">
-              {{ element.id }}
-            </td>
-          </ng-container>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <mat-card
+            *ngFor="let element of items"
+            class="shadow-md rounded-lg p-4 flex flex-col justify-between"
+          >
+            <mat-card-header>
+              <mat-card-title>{{ element.name }}</mat-card-title>
+              <mat-card-subtitle>ID: {{ element.id }}</mat-card-subtitle>
+            </mat-card-header>
 
-          <!-- Name Column -->
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef>Nombre</th>
-            <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-          </ng-container>
+            <!-- Mostrar edad y descripción -->
+            <mat-card-content>
+              <p><strong>Edad:</strong> {{ element.age }}</p>
+              <p><strong>Descripción:</strong> {{ element.description }}</p>
+            </mat-card-content>
 
-          <!-- Actions Column -->
-          <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef class="text-center">
-              Acciones
-            </th>
-            <td mat-cell *matCellDef="let element" class="text-center">
+            <mat-card-actions class="flex justify-end gap-2 mt-4">
               <button
-                mat-button
+                mat-icon-button
                 color="primary"
                 (click)="updateItem(element.id)"
-                class="mx-1"
               >
-                <mat-icon>edit</mat-icon>Editar
+                <mat-icon>edit</mat-icon>
               </button>
               <button
-                mat-button
+                mat-icon-button
                 color="warn"
                 (click)="deleteItem(element.id)"
-                class="mx-1"
               >
-                <mat-icon>delete</mat-icon> Eliminar
+                <mat-icon>delete</mat-icon>
               </button>
-            </td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="['id', 'name', 'actions']"></tr>
-          <tr
-            mat-row
-            *matRowDef="let row; columns: ['id', 'name', 'actions']"
-          ></tr>
-        </table>
+            </mat-card-actions>
+          </mat-card>
+        </div>
       </mat-card-content>
     </mat-card>
   </main>
